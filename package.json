@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "dotenv": "^2.0.0",
+    "materialize-css": "^0.100.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "uport-connect": "^0.7.0"
