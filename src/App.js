@@ -7,6 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 import HostPanel from './HostPanel';
+import GuestPanel from './GuestPanel';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -37,7 +38,8 @@ class App extends Component {
       storageValue: 0,
       host: 'makoto',
       host_avatar_uri: "https://ipfs.infura.io/ipfs/QmNoHv4dx9QkzQHuf1WoNvocDTZBEuoaKQu4EZRRgJ9tAi",
-      // guest: 'jeff',
+      guest: 'jeff',
+      guest_avatar_uri: "https://pbs.twimg.com/profile_images/524825875900932096/WgzhIVwb_400x400.jpeg",
       web3: null
     }
   }
@@ -113,9 +115,11 @@ class App extends Component {
                   host={this.state.host} host_avatar_uri={this.state.host_avatar_uri}
                   stage={this.state.stage}
                 />
-                <h2>Guest: {this.state.guest} </h2>
-                  <RaisedButton label="Check in as a guest" secondary={true} />
-                  <p>The stored value is: {this.state.storageValue}</p>
+
+                <GuestPanel
+                  user={this.state.guest} user_avatar_uri={this.state.guest_avatar_uri}
+                  stage={this.state.stage}
+                />
               </div>
             </div>
             <RaisedButton label="Next" onClick={this.next.bind(this)} />
