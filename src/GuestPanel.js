@@ -35,7 +35,7 @@ const GuestPanel = (props) => {
         </div>
       )
       break;
-    case 'next':
+    case 'proof':
       result = (
         <div>
           <h2>Guest: {props.user} </h2>
@@ -43,6 +43,17 @@ const GuestPanel = (props) => {
             <Avatar src={props.user_avatar_uri} size="100" />
           </div>
           is checked in.
+        </div>
+      )
+      break;
+    case 'next':
+      result = (
+        <div>
+          <h2>Guest: {props.user} </h2>
+          <div>
+            <Avatar src={props.user_avatar_uri} size="100" />
+          </div>
+          got a proof of presence.
         </div>
       )
       break;

@@ -39,6 +39,21 @@ const HostPanel = (props) => {
           </div>
           <RaisedButton label="Confirm guest" primary={true}
             onClick={()=>{
+              props.event.emit('stage', 'proof')
+            }}
+          />
+        </div>
+      )
+      break;
+    case 'proof':
+      result = (
+        <div>
+          <h2>Host: {props.user} </h2>
+          <div>
+            <Avatar src={props.user_avatar_uri} size="100" />
+          </div>
+          <RaisedButton label="Issue an proof" primary={true}
+            onClick={()=>{
               props.event.emit('stage', 'next')
             }}
           />
