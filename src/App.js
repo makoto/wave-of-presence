@@ -1,11 +1,28 @@
 import React, { Component } from 'react'
 import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import getWeb3 from './utils/getWeb3'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
 
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
+
+const waves = [
+  'M480 608c-42.944 0-85.92-16.352-118.624-49.024-40.512-40.48-106.336-40.448-146.752 0-12.512 12.512-32.736 12.512-45.248 0s-12.512-32.736 0-45.248c65.376-65.376 171.808-65.376 237.248 0 40.48 40.448 106.304 40.416 146.752 0 12.512-12.512 32.736-12.512 45.248 0s12.512 32.736 0 45.248c-32.672 32.672-75.648 49.024-118.624 49.024z',
+  'M480 480c-42.944 0-85.92-16.352-118.624-49.024-40.512-40.48-106.336-40.448-146.752 0-12.512 12.512-32.736 12.512-45.248 0s-12.512-32.736 0-45.248c65.376-65.376 171.808-65.376 237.248 0 40.48 40.448 106.304 40.416 146.752 0 12.512-12.512 32.736-12.512 45.248 0s12.512 32.736 0 45.248c-32.672 32.672-75.648 49.024-118.624 49.024z',
+  'M480 352c-42.944 0-85.92-16.352-118.624-49.024-40.512-40.48-106.336-40.448-146.752 0-12.512 12.512-32.736 12.512-45.248 0s-12.512-32.736 0-45.248c65.376-65.344 171.808-65.408 237.248 0 40.48 40.448 106.304 40.416 146.752 0 12.512-12.512 32.736-12.512 45.248 0s12.512 32.736 0 45.248c-32.672 32.672-75.648 49.024-118.624 49.024z'
+];
+
+const HomeIcon = (props) => (
+  <svg width="36" height="36" viewBox="0 0 1024 1024">
+    <path fill="#fff" d={waves[0]}></path>
+    <path fill="#fff" d={waves[1]}></path>
+    <path fill="#fff" d={waves[2]}></path>
+  </svg>
+);
 
 class App extends Component {
   constructor(props) {
@@ -69,24 +86,27 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
-        </nav>
+      <MuiThemeProvider>
+        <div className="App">
+          <AppBar
+            title="Wave Of Presence"
+            iconElementLeft={<IconButton><HomeIcon/></IconButton>}
+          />
 
-        <main className="container">
-          <div className="pure-g">
-            <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
+          <main className="container">
+            <div className="pure-g">
+              <div className="pure-u-1-1">
+                <h1><span class="icon-waves"></span>Good to Go!</h1>
+                <p>Your Truffle Box is installed and ready.</p>
+                <h2>Smart Contract Example</h2>
+                <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
+                <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
+                <p>The stored value is: {this.state.storageValue}</p>
+              </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </main>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

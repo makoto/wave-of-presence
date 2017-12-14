@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import UportApp from './UportApp'
+import App from './App'
 
 ReactDOM.render(
-  <UportApp />,
+  <App />,
   document.getElementById('root')
 );
