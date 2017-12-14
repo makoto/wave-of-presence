@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 import HostPanel from './HostPanel';
 import GuestPanel from './GuestPanel';
+import EventEmitter from 'event-emitter';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -28,12 +29,13 @@ const HomeIcon = (props) => (
   </svg>
 );
 
+const event = EventEmitter();
+
 class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      stages: ['checkin', 'confirm', 'next'],
       stage: 'login',
       storageValue: 0,
       host: 'makoto',
@@ -44,11 +46,11 @@ class App extends Component {
     }
   }
 
-  next(){
-    this.setState({stage:this.state.stages.shift()})
-  }
-
   componentWillMount() {
+    event.on('stage', function(name){
+      this.setState({stage:name})
+    }.bind(this))
+
     // Get network provider and web3 instance.
     // See utils/getWeb3 for more info.
 
@@ -113,16 +115,15 @@ class App extends Component {
                 <div>stage: {this.state.stage}</div>
                 <HostPanel
                   user={this.state.host} user_avatar_uri={this.state.host_avatar_uri}
-                  stage={this.state.stage}
+                  stage={this.state.stage} event = {event}
                 />
 
                 <GuestPanel
                   user={this.state.guest} user_avatar_uri={this.state.guest_avatar_uri}
-                  stage={this.state.stage}
+                  stage={this.state.stage} event = {event}
                 />
               </div>
             </div>
-            <RaisedButton label="Next" onClick={this.next.bind(this)} />
           </main>
         </div>
       </MuiThemeProvider>

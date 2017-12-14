@@ -10,7 +10,12 @@ const HostPanel = (props) => {
       result = (
         <div>
           <h2>Host: </h2>
-          <RaisedButton label="Log in as a host" primary={true} />
+          <RaisedButton
+           label="Log in as a host" primary={true}
+           onClick={()=>{
+             props.event.emit('stage', 'checkin')
+           }}
+          />
         </div>
       )
       break;
@@ -32,7 +37,11 @@ const HostPanel = (props) => {
           <div>
             <Avatar src={props.user_avatar_uri} size="100" />
           </div>
-          <RaisedButton label="Confirm guest" primary={true} />
+          <RaisedButton label="Confirm guest" primary={true}
+            onClick={()=>{
+              props.event.emit('stage', 'next')
+            }}
+          />
         </div>
       )
       break;
@@ -43,7 +52,11 @@ const HostPanel = (props) => {
           <div>
             <Avatar src={props.user_avatar_uri} size="100" />
           </div>
-          <RaisedButton label="Welcome next guest" primary={true} />
+          <RaisedButton label="Welcome next guest" primary={true}
+            onClick={()=>{
+              props.event.emit('stage', 'checkin')
+            }}
+          />
         </div>
       )
       break;

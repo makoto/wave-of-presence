@@ -17,7 +17,11 @@ const GuestPanel = (props) => {
       result = (
         <div>
           <h2>Guest: {props.host} </h2>
-          <RaisedButton label="Check in as a guest" secondary={true} />
+          <RaisedButton label="Check in as a guest" secondary={true}
+            onClick={()=>{
+              props.event.emit('stage', 'confirm')
+            }}
+          />
         </div>
       )
       break;
