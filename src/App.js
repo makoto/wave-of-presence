@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
+import HostPanel from './HostPanel';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -25,59 +26,6 @@ const HomeIcon = (props) => (
     <path fill="#fff" d={waves[2]}></path>
   </svg>
 );
-
-const HostPanel = (props) => {
-  let result;
-  switch (props.stage) {
-    case 'login':
-      result = (
-        <div>
-          <h2>Host: </h2>
-          <RaisedButton label="Log in as a host" primary={true} />
-        </div>
-      )
-      break;
-    case 'checkin':
-      result = (
-        <div>
-          <h2>Host: {props.host} </h2>
-          <div>
-            <Avatar src={props.host_avatar_uri} size="100" />
-          </div>
-          welcomes you.
-        </div>
-      )
-      break;
-    case 'confirm':
-      result = (
-        <div>
-          <h2>Host: {props.host} </h2>
-          <div>
-            <Avatar src={props.host_avatar_uri} size="100" />
-          </div>
-          <RaisedButton label="Confirm guest" primary={true} />
-        </div>
-      )
-      break;
-    case 'next':
-      result = (
-        <div>
-          <h2>Host: {props.host} </h2>
-          <div>
-            <Avatar src={props.host_avatar_uri} size="100" />
-          </div>
-          <RaisedButton label="Welcome next guest" primary={true} />
-        </div>
-      )
-      break;
-    default:
-      result = (
-        <div></div>
-      )
-
-  }
-  return result;
-}
 
 class App extends Component {
   constructor(props) {
