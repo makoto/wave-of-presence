@@ -112,7 +112,7 @@ class App extends Component {
               <div className="pure-u-1-1">
                 <div>stage: {this.state.stage}</div>
                 <HostPanel
-                  host={this.state.host} host_avatar_uri={this.state.host_avatar_uri}
+                  user={this.state.host} user_avatar_uri={this.state.host_avatar_uri}
                   stage={this.state.stage}
                 />
 

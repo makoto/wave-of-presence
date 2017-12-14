@@ -17,9 +17,9 @@ const HostPanel = (props) => {
     case 'checkin':
       result = (
         <div>
-          <h2>Host: {props.host} </h2>
+          <h2>Host: {props.user} </h2>
           <div>
-            <Avatar src={props.host_avatar_uri} size="100" />
+            <Avatar src={props.user_avatar_uri} size="100" />
           </div>
           welcomes you.
         </div>
@@ -28,9 +28,9 @@ const HostPanel = (props) => {
     case 'confirm':
       result = (
         <div>
-          <h2>Host: {props.host} </h2>
+          <h2>Host: {props.user} </h2>
           <div>
-            <Avatar src={props.host_avatar_uri} size="100" />
+            <Avatar src={props.user_avatar_uri} size="100" />
           </div>
           <RaisedButton label="Confirm guest" primary={true} />
         </div>
@@ -39,9 +39,9 @@ const HostPanel = (props) => {
     case 'next':
       result = (
         <div>
-          <h2>Host: {props.host} </h2>
+          <h2>Host: {props.user} </h2>
           <div>
-            <Avatar src={props.host_avatar_uri} size="100" />
+            <Avatar src={props.user_avatar_uri} size="100" />
           </div>
           <RaisedButton label="Welcome next guest" primary={true} />
         </div>
