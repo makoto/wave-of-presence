@@ -40,5 +40,13 @@ contract('WebOfPresence', function(accounts) {
       presence.confirm(guest, Trust.Full, {from:volunteer});
       assert.equal((await presence.isPresent.call(guest)), true);
     });
+
+    it("guest cannot confirm without trust", async function() {
+      await presence.confirm(guest, Trust.None, {from:host});
+      assert.equal((await presence.isPresent.call(guest)), true);
+      assert.equal((await presence.isTrusted.call(guest)), false);
+      presence.confirm(volunteer, Trust.Full, {from:guest}).catch(function(){});
+      assert.equal((await presence.isPresent.call(volunteer)), false);
+    });
   })
 });

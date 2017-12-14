@@ -15,7 +15,7 @@ contract WebOfPresence {
   }
 
   function confirm(address _guest, Trust _trust) public {
-    require(isPresent(msg.sender));
+    require(isTrusted(msg.sender));
     claims[_guest] = Claim(true, msg.sender, _trust);
   }
 
