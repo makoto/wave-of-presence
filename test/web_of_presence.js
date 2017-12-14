@@ -1,6 +1,14 @@
 const WebOfPresence = artifacts.require("./WebOfPresence.sol");
 const Trust = {None:0, Full:1};
 
+function awaitEvent(event, handler) {
+  return new Promise((resolve, reject) => {
+    function wrappedHandler(...args) {
+      Promise.resolve(handler(...args)).then(resolve).catch(reject);
+    }
+    event.watch(wrappedHandler);
+  });
+}
 contract('WebOfPresence', function(accounts) {
   let presence;
   const host = accounts[0];
