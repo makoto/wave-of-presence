@@ -9,8 +9,11 @@ contract('WebOfPresence', function(accounts) {
   it("host is present by default", async function() {
     presence = await WebOfPresence.new(host);
     assert.equal((await presence.isPresent.call(host)), true);
+    assert.equal((await presence.isTrusted.call(host)), true);
     assert.equal((await presence.isPresent.call(volunteer)), false);
+    assert.equal((await presence.isTrusted.call(volunteer)), false);
     assert.equal((await presence.isPresent.call(guest)), false);
+    assert.equal((await presence.isTrusted.call(guest)), false);
   });
 
   describe('on confirm', function(){
@@ -32,6 +35,7 @@ contract('WebOfPresence', function(accounts) {
     it("volunteer can confirm once confirmed", async function() {
       await presence.confirm(volunteer, 1, {from:host});
       assert.equal((await presence.isPresent.call(volunteer)), true);
+      assert.equal((await presence.isTrusted.call(volunteer)), true);
       presence.confirm(guest, 1, {from:volunteer});
       assert.equal((await presence.isPresent.call(guest)), true);
     });

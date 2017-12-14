@@ -22,6 +22,10 @@ contract WebOfPresence {
   function isPresent(address _guest) public view returns (bool) {
     return claims[_guest].present;
   }
+
+  function isTrusted(address _guest) public view returns (bool) {
+    return claims[_guest].trust == Trust.Full;
+  }
 }
 
 /*0x14723a09acff6d2a60dcdf7aa4aff308fddc160c
