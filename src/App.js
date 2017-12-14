@@ -4,6 +4,8 @@ import getWeb3 from './utils/getWeb3'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Avatar from 'material-ui/Avatar';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -24,14 +26,76 @@ const HomeIcon = (props) => (
   </svg>
 );
 
+const HostPanel = (props) => {
+  let result;
+  switch (props.stage) {
+    case 'login':
+      result = (
+        <div>
+          <h2>Host: </h2>
+          <RaisedButton label="Log in as a host" primary={true} />
+        </div>
+      )
+      break;
+    case 'checkin':
+      result = (
+        <div>
+          <h2>Host: {props.host} </h2>
+          <div>
+            <Avatar src={props.host_avatar_uri} size="100" />
+          </div>
+          welcomes you.
+        </div>
+      )
+      break;
+    case 'confirm':
+      result = (
+        <div>
+          <h2>Host: {props.host} </h2>
+          <div>
+            <Avatar src={props.host_avatar_uri} size="100" />
+          </div>
+          <RaisedButton label="Confirm guest" primary={true} />
+        </div>
+      )
+      break;
+    case 'next':
+      result = (
+        <div>
+          <h2>Host: {props.host} </h2>
+          <div>
+            <Avatar src={props.host_avatar_uri} size="100" />
+          </div>
+          <RaisedButton label="Welcome next guest" primary={true} />
+        </div>
+      )
+      break;
+    default:
+      result = (
+        <div></div>
+      )
+
+  }
+  return result;
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      stages: ['checkin', 'confirm', 'next'],
+      stage: 'login',
       storageValue: 0,
+      host: 'makoto',
+      host_avatar_uri: "https://ipfs.infura.io/ipfs/QmNoHv4dx9QkzQHuf1WoNvocDTZBEuoaKQu4EZRRgJ9tAi",
+      // guest: 'jeff',
       web3: null
     }
+  }
+
+  next(){
+    this.setState({stage:this.state.stages.shift()})
   }
 
   componentWillMount() {
@@ -96,14 +160,17 @@ class App extends Component {
           <main className="container">
             <div className="pure-g">
               <div className="pure-u-1-1">
-                <h1><span class="icon-waves"></span>Good to Go!</h1>
-                <p>Your Truffle Box is installed and ready.</p>
-                <h2>Smart Contract Example</h2>
-                <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-                <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-                <p>The stored value is: {this.state.storageValue}</p>
+                <div>stage: {this.state.stage}</div>
+                <HostPanel
+                  host={this.state.host} host_avatar_uri={this.state.host_avatar_uri}
+                  stage={this.state.stage}
+                />
+                <h2>Guest: {this.state.guest} </h2>
+                  <RaisedButton label="Check in as a guest" secondary={true} />
+                  <p>The stored value is: {this.state.storageValue}</p>
               </div>
             </div>
+            <RaisedButton label="Next" onClick={this.next.bind(this)} />
           </main>
         </div>
       </MuiThemeProvider>
