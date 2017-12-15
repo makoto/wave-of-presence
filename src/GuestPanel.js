@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
+import { Connect, SimpleSigner, MNID } from 'uport-connect'
 
 const GuestPanel = (props) => {
   let result;
@@ -19,7 +20,23 @@ const GuestPanel = (props) => {
           <h2>Guest: {props.host} </h2>
           <RaisedButton label="Check in as a guest" secondary={true}
             onClick={()=>{
-              props.event.emit('stage', 'confirm')
+              const uport2 = new Connect('BlockParty', {
+                clientId: '2oueY3Rx7vtiRZ77cWQiAjVG9YKkJgwQDFi',
+                network: 'rinkeby',
+                signer: SimpleSigner('060fae1ca6ecbd00fa766d200c8cad5988ad2f7e6f7b3832b2667031763e1927')
+              })
+              uport2.requestCredentials({
+                requested: ['name', 'avatar'],
+                notifications: true // We want this if we want to recieve credentials
+              })
+              .then((credentials) => {
+                props.event.emit('stage', {
+                  stage: 'confirm',
+                  guest:credentials.name,
+                  guest_avatar_uri:credentials.avatar.uri,
+                  guest_address:credentials.address,
+                })
+              })
             }}
           />
         </div>

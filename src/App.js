@@ -4,8 +4,6 @@ import getWeb3 from './utils/getWeb3'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import Avatar from 'material-ui/Avatar';
 import HostPanel from './HostPanel';
 import GuestPanel from './GuestPanel';
 import EventEmitter from 'event-emitter';
@@ -38,17 +36,20 @@ class App extends Component {
     this.state = {
       stage: 'login',
       storageValue: 0,
-      host: 'makoto',
-      host_avatar_uri: "https://ipfs.infura.io/ipfs/QmNoHv4dx9QkzQHuf1WoNvocDTZBEuoaKQu4EZRRgJ9tAi",
+      host: 'ddd',
+      // host_avatar_uri: "https://ipfs.infura.io/ipfs/QmNoHv4dx9QkzQHuf1WoNvocDTZBEuoaKQu4EZRRgJ9tAi",
+      host_avatar_uri: "",
+      host_address:"",
       guest: 'jeff',
       guest_avatar_uri: "https://pbs.twimg.com/profile_images/524825875900932096/WgzhIVwb_400x400.jpeg",
+      guest_address:"",
       web3: null
     }
   }
 
   componentWillMount() {
-    event.on('stage', function(name){
-      this.setState({stage:name})
+    event.on('stage', function(obj){
+      this.setState(obj)
     }.bind(this))
 
     // Get network provider and web3 instance.

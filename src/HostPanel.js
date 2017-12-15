@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
+import { web3, uport } from './utils/uportSetup.js'
 
 const HostPanel = (props) => {
   let result;
@@ -13,7 +14,18 @@ const HostPanel = (props) => {
           <RaisedButton
            label="Log in as a host" primary={true}
            onClick={()=>{
-             props.event.emit('stage', 'checkin')
+             uport.requestCredentials({
+               requested: ['name', 'avatar'],
+               notifications: true // We want this if we want to recieve credentials
+             })
+             .then((credentials) => {
+               props.event.emit('stage', {
+                 stage: 'checkin',
+                 host:credentials.name,
+                 host_avatar_uri:credentials.avatar.uri,
+                 host_address:credentials.address,
+               })
+             })
            }}
           />
         </div>
@@ -39,7 +51,7 @@ const HostPanel = (props) => {
           </div>
           <RaisedButton label="Confirm guest" primary={true}
             onClick={()=>{
-              props.event.emit('stage', 'proof')
+              props.event.emit('stage', {stage:'proof'})
             }}
           />
         </div>
@@ -54,7 +66,7 @@ const HostPanel = (props) => {
           </div>
           <RaisedButton label="Issue an proof" primary={true}
             onClick={()=>{
-              props.event.emit('stage', 'next')
+              props.event.emit('stage', {stage:'next'})
             }}
           />
         </div>
@@ -69,7 +81,7 @@ const HostPanel = (props) => {
           </div>
           <RaisedButton label="Welcome next guest" primary={true}
             onClick={()=>{
-              props.event.emit('stage', 'checkin')
+              props.event.emit('stage', {stage:'checkin'})
             }}
           />
         </div>
