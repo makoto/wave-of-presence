@@ -17,7 +17,7 @@ contract WaveOfPresence {
   }
 
   function confirm(address _guest, Trust _trust) public {
-    require(isTrusted(msg.sender));
+    /*require(isTrusted(msg.sender));*/
     claims[_guest] = Claim(true, msg.sender, _trust);
     ConfirmedEvent(msg.sender, _guest, _trust);
   }
