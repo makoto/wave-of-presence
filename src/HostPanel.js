@@ -66,7 +66,14 @@ const HostPanel = (props) => {
           </div>
           <RaisedButton label="Issue an proof" primary={true}
             onClick={()=>{
-              props.event.emit('stage', {stage:'next'})
+              uport.attestCredentials({
+                sub: props.user_address,
+                claim: { "Proof Of Presence": "You have attended DevCon4" },
+                notifcations: true,
+              }).then((a,b)=>{
+                console.log('attested', a,b)
+                props.event.emit('stage', {stage:'next'})
+              })
             }}
           />
         </div>
