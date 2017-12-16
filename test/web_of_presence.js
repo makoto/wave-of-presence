@@ -1,4 +1,4 @@
-const WebOfPresence = artifacts.require("./WebOfPresence.sol");
+const WaveOfPresence = artifacts.require("./WaveOfPresence.sol");
 const Trust = {None:0, Full:1};
 
 function awaitEvent(event, handler) {
@@ -9,14 +9,14 @@ function awaitEvent(event, handler) {
     event.watch(wrappedHandler);
   });
 }
-contract('WebOfPresence', function(accounts) {
+contract('WaveOfPresence', function(accounts) {
   let presence;
   const host = accounts[0];
   const volunteer = accounts[1];
   const guest = accounts[2];
 
   it("host is present by default", async function() {
-    presence = await WebOfPresence.new(host);
+    presence = await WaveOfPresence.new(host);
     assert.equal((await presence.isPresent.call(host)), true);
     assert.equal((await presence.isTrusted.call(host)), true);
     assert.equal((await presence.isPresent.call(volunteer)), false);
@@ -27,7 +27,7 @@ contract('WebOfPresence', function(accounts) {
 
   describe('on confirm', function(){
     beforeEach(async function(){
-      presence = await WebOfPresence.new(host);
+      presence = await WaveOfPresence.new(host);
     })
 
     it("host can confirm attendance", async function() {

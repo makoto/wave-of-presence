@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-contract WebOfPresence {
+contract WaveOfPresence {
   enum Trust { None, Full }
 
   struct Claim {
@@ -11,7 +11,7 @@ contract WebOfPresence {
   mapping (address => Claim) public claims;
   event ConfirmedEvent(address confirming, address confirmed, Trust trust);
 
-  function WebOfPresence(address _host){
+  function WaveOfPresence(address _host){
     claims[_host] = Claim(true, 0x0, Trust.Full);
     ConfirmedEvent(0x0, _host, Trust.Full);
   }
