@@ -115,7 +115,9 @@ class App extends Component {
               <div className="pure-u-1-1">
                 <h1>Welcome to DevCon4 </h1>
                 <HostPanel
-                  user={this.state.host} user_avatar_uri={this.state.host_avatar_uri}
+                  user={this.state.host}
+                  user_avatar_uri={this.state.host_avatar_uri}
+                  user_address = {this.state.guest_address}
                   stage={this.state.stage} event = {event}
                 />
 
