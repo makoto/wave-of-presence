@@ -19,7 +19,7 @@ const GuestPanel = (props) => {
           <h2>Guest: {props.host} </h2>
           <RaisedButton label="Check in as a guest" secondary={true}
             onClick={()=>{
-              const uport2 = new Connect('BlockParty', {
+              const uport2 = new Connect('WaveOfPresence', {
                 clientId: '2oueY3Rx7vtiRZ77cWQiAjVG9YKkJgwQDFi',
                 network: 'rinkeby',
                 signer: SimpleSigner('060fae1ca6ecbd00fa766d200c8cad5988ad2f7e6f7b3832b2667031763e1927')

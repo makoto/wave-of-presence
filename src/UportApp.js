@@ -6,7 +6,7 @@ class UportApp extends Component {
   constructor(props) {
     super(props)
     console.log('constructor')
-    const uport = new Connect('BlockParty', {
+    const uport = new Connect('WaveOfPresence', {
       clientId: '2oueY3Rx7vtiRZ77cWQiAjVG9YKkJgwQDFi',
       network: 'rinkeby',
       signer: SimpleSigner('060fae1ca6ecbd00fa766d200c8cad5988ad2f7e6f7b3832b2667031763e1927')
