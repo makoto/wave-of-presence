@@ -46,7 +46,11 @@ I created so that I can use to manage local event along side with BlockParty.
 
 The checkin process does not handle crypto currency so it can be used for real even when Uport is not deployed in mainnet. All I have to write is an additional function to attest the link between mainnet ethereum address UPort Linkeby address.
 
-## Why `Wave` not `Web`?
+### Why some of your demo video says "Connecting to BlockParty" rather than "Connecting to WebOfPresence"?
+
+BlockParty was the name I registered as a test app. I wanted to register WebOfPresence to Uport app but keep getting error :-(.
+
+### Why `Wave` not `Web`?
 
 I came up with the idea while I was on a  beach in Vietnam :-)
 
