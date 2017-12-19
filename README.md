@@ -52,6 +52,10 @@ I came up with the idea while I was on a  beach in Vietnam :-)
 
 ## Dev
 
+Install libraries.
+
+`npm install`
+
 ### Runnig test (against testrpc)
 
 `truffle test`
