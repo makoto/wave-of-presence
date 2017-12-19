@@ -31,16 +31,17 @@ const HostPanel = (props) => {
                 console.log('credentials.address', credentials);
                 const decodedId = MNID.decode(credentials.address).address;
                 MyContract.isTrusted.call(decodedId, (error, response) => {
-                  if (error) {
-                    props.event.emit('stage', {
-                      stage: 'error'
-                    })
-                  }else{
+                  console.log('isTrusted', decodedId, error, response)
+                  if (response) {
                     props.event.emit('stage', {
                       stage: 'checkin',
                       host:credentials.name,
                       host_avatar_uri:credentials.avatar.uri,
                       host_address:credentials.address,
+                    })
+                  }else{
+                    props.event.emit('stage', {
+                      stage: 'error'
                     })
                   }
                 })
@@ -53,13 +54,8 @@ const HostPanel = (props) => {
     case 'error':
       result = (
         <div>
-          <RaisedButton label="Go back to login page" primary={true}
-            onClick={()=>{
-              props.event.emit('stage', {stage:'login'})
-            }}
-          />
           <div>
-            You are not authorised to login as a host.
+            You are not authorised to login as a host. Refresh the page to start again.
           </div>
         </div>
       )
