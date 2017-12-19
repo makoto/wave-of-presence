@@ -20,21 +20,47 @@ const HostPanel = (props) => {
           <RaisedButton
            label="Log in as a host" primary={true}
            onClick={()=>{
+              // props.event.emit('stage', {
+              //   stage: 'error',
+              // })
              uport.requestCredentials({
                requested: ['name', 'avatar'],
                notifications: true // We want this if we want to recieve credentials
              })
              .then((credentials) => {
-               console.log('credentials', credentials);
-               props.event.emit('stage', {
-                 stage: 'checkin',
-                 host:credentials.name,
-                 host_avatar_uri:credentials.avatar.uri,
-                 host_address:credentials.address,
-               })
+                console.log('credentials.address', credentials);
+                const decodedId = MNID.decode(credentials.address).address;
+                MyContract.isTrusted.call(decodedId, (error, response) => {
+                  if (error) {
+                    props.event.emit('stage', {
+                      stage: 'error'
+                    })
+                  }else{
+                    props.event.emit('stage', {
+                      stage: 'checkin',
+                      host:credentials.name,
+                      host_avatar_uri:credentials.avatar.uri,
+                      host_address:credentials.address,
+                    })
+                  }
+                })
              })
            }}
           />
+        </div>
+      )
+      break;
+    case 'error':
+      result = (
+        <div>
+          <RaisedButton label="Go back to login page" primary={true}
+            onClick={()=>{
+              props.event.emit('stage', {stage:'login'})
+            }}
+          />
+          <div>
+            You are not authorised to login as a host.
+          </div>
         </div>
       )
       break;
@@ -59,10 +85,9 @@ const HostPanel = (props) => {
           <RaisedButton label="Confirm guest" primary={true}
             onClick={()=>{
               // let host_address = "0x5a384227b65fa093dec03ec34e111db80a040615"
-              let host_address = "2odgxKGQvWfrhaAhJ53dc66tssZkh4j8x9b"
-              const decodedId = MNID.decode(host_address).address;
+              // let host_address = "2odgxKGQvWfrhaAhJ53dc66tssZkh4j8x9b"
+              const decodedId = MNID.decode(props.user_address).address;
               console.log('decodedId', decodedId);
-              let gest_address = ""
               // Transaction signing (that will fire a QR to scan or card in the mobile app)
               MyContract.confirm(decodedId, 1, (error, txHash) => {
                 if (error) { throw error }
