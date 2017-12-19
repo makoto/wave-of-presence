@@ -79,3 +79,7 @@ Install libraries.
 
 - [Truffle](http://truffleframework.com) = for general framework
 - [Truffle React](http://truffleframework.com/boxes/react) box for boilerplate
+
+### TODO
+
+- Listen to the event so that it can visualise the list of people who checked in.
