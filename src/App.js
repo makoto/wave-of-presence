@@ -117,6 +117,7 @@ class App extends Component {
                 <HostPanel
                   user={this.state.host}
                   user_avatar_uri={this.state.host_avatar_uri}
+                  // Host is confirming guest hence passing guest address.
                   user_address = {this.state.guest_address}
                   stage={this.state.stage} event = {event}
                 />
